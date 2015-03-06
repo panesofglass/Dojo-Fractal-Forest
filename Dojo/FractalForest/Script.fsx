@@ -39,7 +39,7 @@ let drawLine (target : Graphics) (brush : Brush)
     target.DrawLine(pen, origin, destination)
 
 let draw x y angle length width = 
-    let red = max 0 (int length - 20)
+    let red = max 10 (if length > 100. then int length - 50 else int length + 50)
     let brush = new SolidBrush(Color.FromArgb(red, 100, 50))
     drawLine graphics brush x y angle length width
 
@@ -59,8 +59,8 @@ let drawTree x y angle length width =
             draw x y (pi*angle) length width
             let x', y' = endpoint x y (pi*angle) length
             let length', width', div' = length/div, width/div, div*0.95
-            drawBranch x' y' (angle + (0.3*0.82)) length' width' div'
-            drawBranch x' y' (angle - (0.4*0.78)) length' width' div'
+            drawBranch x' y' (angle + (0.2*0.82)) length' width' div'
+            drawBranch x' y' (angle - (0.3*0.78)) length' width' div'
         else ()
     drawBranch x y angle length width 2.
 drawTree 250. 50. 0.5 200. 5.
